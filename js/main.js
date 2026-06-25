@@ -33,4 +33,14 @@ function applyLang(lang){
 
 document.addEventListener("DOMContentLoaded", () => {
   applyLang(getLang());
+
+  document.querySelectorAll("[data-lang-btn]").forEach(btn=>{
+    btn.addEventListener("click",()=>applyLang(btn.getAttribute("data-lang-btn")));
+  });
+  const burger=document.querySelector(".burger");
+  const nav=document.getElementById("nav");
+  if(burger&&nav){
+    burger.addEventListener("click",()=>nav.classList.toggle("open"));
+    nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));
+  }
 });
