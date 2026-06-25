@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // optimistic swap; keep base image if file missing
         const probe=new Image();
         probe.onload=()=>{img.src=candidate;};
+        probe.onerror=()=>{};
         probe.src=candidate;
       });
     });
@@ -130,7 +131,7 @@ if(form){
     const fd=new FormData(form);
     const text=buildMessage({
       name:fd.get("name"),phone:fd.get("phone"),product:fd.get("product")});
-    openMessenger(fd.get("channel"),text);
+    openMessenger("wa",text);
   });
 }
 document.querySelectorAll(".order-btn").forEach(btn=>{
@@ -141,7 +142,11 @@ document.querySelectorAll(".order-btn").forEach(btn=>{
   });
 });
 
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add("visible");io.unobserve(en.target);} });
-},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+if ('IntersectionObserver' in window) {
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add("visible");io.unobserve(en.target);} });
+  },{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+} else {
+  document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+}
