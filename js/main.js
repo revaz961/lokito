@@ -16,7 +16,9 @@ const I18N = {
        p_gw_desc:"გეითვეი დისტანციური მართვისთვის. G3P-ს აქვს PoE.",
        unlock_title:"გაღების 5 მეთოდი", u_pin:"სენსორული პინკოდი", u_finger:"თითის ანაბეჭდი",
        u_app:"აპლიკაცია", u_card:"უკონტაქტო ბარათი", u_key:"მექანიკური გასაღები",
-       how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"დაყენება" },
+       how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"დაყენება",
+       contact_title:"კონტაქტი", f_name:"სახელი", f_phone:"ტელეფონი", f_submit:"გაგზავნა",
+       m_order:"შეკვეთა", m_name:"სახელი", m_phone:"ტელეფონი", m_product:"პროდუქტი" },
   ru:{ nav_catalog:"Каталог", nav_unlock:"Способы открытия",
        nav_how:"Как работаем", nav_contact:"Контакты",
        cta_call:"Позвонить", hero_title:"Умные замки и другие системы",
@@ -32,7 +34,9 @@ const I18N = {
        p_gw_desc:"Шлюз для удалённого управления. G3P с PoE.",
        unlock_title:"5 способов открытия", u_pin:"Сенсорный пинкод", u_finger:"Отпечаток пальца",
        u_app:"Приложение", u_card:"Бесконтактная карта", u_key:"Механический ключ",
-       how_title:"Как мы работаем", how_1:"Заказ", how_2:"Доставка", how_3:"Монтаж", how_4:"Настройка" },
+       how_title:"Как мы работаем", how_1:"Заказ", how_2:"Доставка", how_3:"Монтаж", how_4:"Настройка",
+       contact_title:"Контакты", f_name:"Имя", f_phone:"Телефон", f_submit:"Отправить",
+       m_order:"Заявка", m_name:"Имя", m_phone:"Телефон", m_product:"Товар" },
   en:{ nav_catalog:"Catalog", nav_unlock:"Unlock methods",
        nav_how:"How we work", nav_contact:"Contact",
        cta_call:"Call", hero_title:"Smart locks and other systems",
@@ -48,7 +52,9 @@ const I18N = {
        p_gw_desc:"Gateway for remote control. G3P has PoE.",
        unlock_title:"5 ways to unlock", u_pin:"Touch PIN code", u_finger:"Fingerprint",
        u_app:"Mobile app", u_card:"Contactless card", u_key:"Mechanical key",
-       how_title:"How we work", how_1:"Order", how_2:"Delivery", how_3:"Installation", how_4:"Setup" },
+       how_title:"How we work", how_1:"Order", how_2:"Delivery", how_3:"Installation", how_4:"Setup",
+       contact_title:"Contact", f_name:"Name", f_phone:"Phone", f_submit:"Send",
+       m_order:"Order", m_name:"Name", m_phone:"Phone", m_product:"Product" },
 };
 
 function getLang(){ return localStorage.getItem("lokito_lang") || "ka"; }
@@ -99,5 +105,35 @@ document.addEventListener("DOMContentLoaded", () => {
         probe.src=candidate;
       });
     });
+  });
+});
+
+const PHONE_WA="995598334380";
+function buildMessage({name,phone,product}){
+  const d=I18N[getLang()];
+  return `${d.m_order}: ${d.m_name}: ${name}, ${d.m_phone}: ${phone}, ${d.m_product}: ${product}`;
+}
+function openMessenger(channel,text){
+  const enc=encodeURIComponent(text);
+  const url = channel==="viber"
+    ? `viber://forward?text=${enc}`
+    : `https://wa.me/${PHONE_WA}?text=${enc}`;
+  window.open(url,"_blank");
+}
+const form=document.getElementById("order-form");
+if(form){
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const fd=new FormData(form);
+    const text=buildMessage({
+      name:fd.get("name"),phone:fd.get("phone"),product:fd.get("product")});
+    openMessenger(fd.get("channel"),text);
+  });
+}
+document.querySelectorAll(".order-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const sel=form&&form.querySelector('select[name="product"]');
+    if(sel) sel.value=btn.getAttribute("data-product");
+    document.getElementById("contact").scrollIntoView({behavior:"smooth"});
   });
 });

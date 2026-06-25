@@ -124,6 +124,35 @@
         </ol>
       </div>
     </section>
+
+    <section id="contact" class="section section-alt">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2 class="section-title" data-i18n="contact_title">კონტაქტი</h2>
+          <a class="contact-line" href="tel:+995598334380">+995 598 33 43 80</a>
+          <a class="contact-line" href="tel:+995599719740">+995 599 71 97 40</a>
+          <div class="msg-buttons">
+            <a class="btn btn-wa" href="https://wa.me/995598334380" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn-viber" href="viber://chat?number=%2B995598334380" target="_blank" rel="noopener">Viber</a>
+          </div>
+        </div>
+        <form id="order-form" class="order-form">
+          <input name="name" required data-i18n-attr="placeholder:f_name">
+          <input name="phone" required data-i18n-attr="placeholder:f_phone">
+          <select name="product">
+            <option value="TAICHEN T2302">TAICHEN T2302</option>
+            <option value="TAICHEN XG02">TAICHEN XG02</option>
+            <option value="TAICHEN G02">TAICHEN G02</option>
+            <option value="Gateway G3/G3P">Gateway G3/G3P</option>
+          </select>
+          <div class="msg-choice">
+            <label><input type="radio" name="channel" value="wa" checked> WhatsApp</label>
+            <label><input type="radio" name="channel" value="viber"> Viber</label>
+          </div>
+          <button type="submit" class="btn btn-gold" data-i18n="f_submit"></button>
+        </form>
+      </div>
+    </section>
   </main>
   <script src="js/main.js" defer></script>
 </body>
