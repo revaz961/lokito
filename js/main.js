@@ -1,7 +1,7 @@
 "use strict";
 
 const I18N = {
-  ka:{ nav_catalog:"კატალოგი", nav_unlock:"გაღების მეთოდები",
+  ka:{ company_name: "ლოკიტო", nav_catalog:"კატალოგი", nav_unlock:"გაღების მეთოდები",
        nav_how:"როგორ ვმუშაობთ", nav_contact:"კონტაქტი",
        cta_call:"დარეკვა", hero_title:"ჭკვიანი საკეტები და სხვა სისტემები",
        hero_sub:"სრული მომსახურება შეკვეთიდან დაყენებამდე",
@@ -16,11 +16,11 @@ const I18N = {
        p_gw_desc:"გეითვეი დისტანციური მართვისთვის. G3P-ს აქვს PoE.",
        unlock_title:"გაღების 5 მეთოდი", u_pin:"სენსორული პინკოდი", u_finger:"თითის ანაბეჭდი",
        u_app:"აპლიკაცია", u_card:"უკონტაქტო ბარათი", u_key:"მექანიკური გასაღები",
-       how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"დაყენება",
+       how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"პროგრამული უზრუნველყოფა",
        contact_title:"კონტაქტი", f_name:"სახელი", f_phone:"ტელეფონი", f_submit:"გაგზავნა",
        m_order:"შეკვეთა", m_name:"სახელი", m_phone:"ტელეფონი", m_product:"პროდუქტი",
        footer_rights:"ყველა უფლება დაცულია" },
-  ru:{ nav_catalog:"Каталог", nav_unlock:"Способы открытия",
+  ru:{ company_name: "локито", nav_catalog:"Каталог", nav_unlock:"Способы открытия",
        nav_how:"Как работаем", nav_contact:"Контакты",
        cta_call:"Позвонить", hero_title:"Умные замки и другие системы",
        hero_sub:"Полный сервис от заказа до установки",
@@ -39,7 +39,7 @@ const I18N = {
        contact_title:"Контакты", f_name:"Имя", f_phone:"Телефон", f_submit:"Отправить",
        m_order:"Заявка", m_name:"Имя", m_phone:"Телефон", m_product:"Товар",
        footer_rights:"Все права защищены" },
-  en:{ nav_catalog:"Catalog", nav_unlock:"Unlock methods",
+  en:{ company_name: "lockito", nav_catalog:"Catalog", nav_unlock:"Unlock methods",
        nav_how:"How we work", nav_contact:"Contact",
        cta_call:"Call", hero_title:"Smart locks and other systems",
        hero_sub:"Full service from order to installation",
