@@ -27,8 +27,9 @@ const I18N = {
        unlock_title:"გაღების 5 მეთოდი", u_pin:"სენსორული პინკოდი", u_finger:"თითის ანაბეჭდი",
        u_app:"აპლიკაცია", u_card:"უკონტაქტო ბარათი", u_key:"მექანიკური გასაღები",
        how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"პროგრამული უზრუნველყოფა",
-       contact_title:"კონტაქტი", f_name:"სახელი", f_phone:"ტელეფონი", f_submit:"გაგზავნა",
-       m_order:"შეკვეთა", m_name:"სახელი", m_phone:"ტელეფონი", m_product:"პროდუქტი",
+       contact_title:"კონტაქტი", f_name:"სახელი", f_phone:"ტელეფონი", f_note:"კომენტარი (არასავალდებულო)", f_submit:"გაგზავნა",
+       m_greeting:"გამარჯობა! 👋", m_intro:"მინდა შეკვეთა Lockito-დან:", m_closing:"გთხოვთ დამიკავშირდეთ. გმადლობთ! 🙏",
+       m_order:"შეკვეთა", m_name:"სახელი", m_phone:"ტელეფონი", m_product:"პროდუქტი", m_note:"კომენტარი",
        footer_rights:"ყველა უფლება დაცულია" },
   ru:{ company_name: "локито", nav_catalog:"Каталог", nav_unlock:"Способы открытия",
        nav_how:"Как работаем", nav_contact:"Контакты",
@@ -56,8 +57,9 @@ const I18N = {
        unlock_title:"5 способов открытия", u_pin:"Сенсорный пинкод", u_finger:"Отпечаток пальца",
        u_app:"Приложение", u_card:"Бесконтактная карта", u_key:"Механический ключ",
        how_title:"Как мы работаем", how_1:"Заказ", how_2:"Доставка", how_3:"Монтаж", how_4:"Настройка",
-       contact_title:"Контакты", f_name:"Имя", f_phone:"Телефон", f_submit:"Отправить",
-       m_order:"Заявка", m_name:"Имя", m_phone:"Телефон", m_product:"Товар",
+       contact_title:"Контакты", f_name:"Имя", f_phone:"Телефон", f_note:"Комментарий (необязательно)", f_submit:"Отправить",
+       m_greeting:"Здравствуйте! 👋", m_intro:"Хочу оформить заказ в Lockito:", m_closing:"Пожалуйста, свяжитесь со мной. Спасибо! 🙏",
+       m_order:"Заявка", m_name:"Имя", m_phone:"Телефон", m_product:"Товар", m_note:"Комментарий",
        footer_rights:"Все права защищены" },
   en:{ company_name: "lockito", nav_catalog:"Catalog", nav_unlock:"Unlock methods",
        nav_how:"How we work", nav_contact:"Contact",
@@ -85,8 +87,9 @@ const I18N = {
        unlock_title:"5 ways to unlock", u_pin:"Touch PIN code", u_finger:"Fingerprint",
        u_app:"Mobile app", u_card:"Contactless card", u_key:"Mechanical key",
        how_title:"How we work", how_1:"Order", how_2:"Delivery", how_3:"Installation", how_4:"Setup",
-       contact_title:"Contact", f_name:"Name", f_phone:"Phone", f_submit:"Send",
-       m_order:"Order", m_name:"Name", m_phone:"Phone", m_product:"Product",
+       contact_title:"Contact", f_name:"Name", f_phone:"Phone", f_note:"Comment (optional)", f_submit:"Send",
+       m_greeting:"Hello! 👋", m_intro:"I'd like to place an order at Lockito:", m_closing:"Please get in touch. Thank you! 🙏",
+       m_order:"Order", m_name:"Name", m_phone:"Phone", m_product:"Product", m_note:"Comment",
        footer_rights:"All rights reserved" },
 };
 
@@ -143,9 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const PHONE_WA="995598334380";
-function buildMessage({name,phone,product}){
+function buildMessage({name,phone,product,note}){
   const d=I18N[getLang()];
-  return `${d.m_order}: ${d.m_name}: ${name}, ${d.m_phone}: ${phone}, ${d.m_product}: ${product}`;
+  let msg = `${d.m_greeting}\n${d.m_intro}\n\n`;
+  msg += `🔒 ${d.m_product}: ${product}\n`;
+  msg += `👤 ${d.m_name}: ${name}\n`;
+  msg += `📞 ${d.m_phone}: ${phone}`;
+  if (note && note.trim()) msg += `\n📝 ${d.m_note}: ${note.trim()}`;
+  msg += `\n\n${d.m_closing}`;
+  return msg;
 }
 function openMessenger(channel,text){
   const enc=encodeURIComponent(text);
@@ -160,7 +169,7 @@ if(form){
     e.preventDefault();
     const fd=new FormData(form);
     const text=buildMessage({
-      name:fd.get("name"),phone:fd.get("phone"),product:fd.get("product")});
+      name:fd.get("name"),phone:fd.get("phone"),product:fd.get("product"),note:fd.get("note")});
     openMessenger("wa",text);
   });
 }
