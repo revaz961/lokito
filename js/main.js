@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const PHONE_WA="995598334380";
+const PHONE_WA="995599719740";
 function buildMessage({name,phone,product,address,install,note}){
   const d=I18N[getLang()];
   let msg = `${d.m_greeting}\n${d.m_intro}\n\n`;
