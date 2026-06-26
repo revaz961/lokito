@@ -28,7 +28,7 @@ const I18N = {
        u_app:"აპლიკაცია", u_card:"უკონტაქტო ბარათი", u_key:"მექანიკური გასაღები",
        how_title:"როგორ ვმუშაობთ", how_1:"შეკვეთა", how_2:"მიწოდება", how_3:"მონტაჟი", how_4:"პროგრამული უზრუნველყოფა",
        contact_title:"კონტაქტი", f_name:"სახელი", f_phone:"ტელეფონი", f_address:"მისამართი (არასავალდებულო)", f_install:"მჭირდება მონტაჟი", f_note:"კომენტარი (არასავალდებულო)", f_submit:"გაგზავნა",
-       m_greeting:"გამარჯობა! 👋", m_intro:"მინდა შეკვეთა Lockito-დან:", m_closing:"გთხოვთ დამიკავშირდეთ. გმადლობთ! 🙏",
+       m_greeting:"გამარჯობა!", m_intro:"მინდა შეკვეთა Lockito-დან:", m_closing:"გთხოვთ დამიკავშირდეთ დეტალებისთვის. გმადლობთ!",
        m_order:"შეკვეთა", m_name:"სახელი", m_phone:"ტელეფონი", m_product:"პროდუქტი", m_address:"მისამართი", m_install:"მჭირდება მონტაჟი", m_note:"კომენტარი",
        footer_rights:"ყველა უფლება დაცულია" },
   ru:{ company_name: "локито", nav_catalog:"Каталог", nav_unlock:"Способы открытия",
@@ -58,7 +58,7 @@ const I18N = {
        u_app:"Приложение", u_card:"Бесконтактная карта", u_key:"Механический ключ",
        how_title:"Как мы работаем", how_1:"Заказ", how_2:"Доставка", how_3:"Монтаж", how_4:"Настройка",
        contact_title:"Контакты", f_name:"Имя", f_phone:"Телефон", f_address:"Адрес (необязательно)", f_install:"Нужен монтаж", f_note:"Комментарий (необязательно)", f_submit:"Отправить",
-       m_greeting:"Здравствуйте! 👋", m_intro:"Хочу оформить заказ в Lockito:", m_closing:"Пожалуйста, свяжитесь со мной. Спасибо! 🙏",
+       m_greeting:"Здравствуйте!", m_intro:"Хочу оформить заказ в Lockito:", m_closing:"Пожалуйста, свяжитесь со мной для деталей. Спасибо!",
        m_order:"Заявка", m_name:"Имя", m_phone:"Телефон", m_product:"Товар", m_address:"Адрес", m_install:"Нужен монтаж", m_note:"Комментарий",
        footer_rights:"Все права защищены" },
   en:{ company_name: "lockito", nav_catalog:"Catalog", nav_unlock:"Unlock methods",
@@ -88,7 +88,7 @@ const I18N = {
        u_app:"Mobile app", u_card:"Contactless card", u_key:"Mechanical key",
        how_title:"How we work", how_1:"Order", how_2:"Delivery", how_3:"Installation", how_4:"Setup",
        contact_title:"Contact", f_name:"Name", f_phone:"Phone", f_address:"Address (optional)", f_install:"Installation needed", f_note:"Comment (optional)", f_submit:"Send",
-       m_greeting:"Hello! 👋", m_intro:"I'd like to place an order at Lockito:", m_closing:"Please get in touch. Thank you! 🙏",
+       m_greeting:"Hello!", m_intro:"I'd like to place an order at Lockito:", m_closing:"Please get in touch with the details. Thank you!",
        m_order:"Order", m_name:"Name", m_phone:"Phone", m_product:"Product", m_address:"Address", m_install:"Installation needed", m_note:"Comment",
        footer_rights:"All rights reserved" },
 };
@@ -149,12 +149,12 @@ const PHONE_WA="995598334380";
 function buildMessage({name,phone,product,address,install,note}){
   const d=I18N[getLang()];
   let msg = `${d.m_greeting}\n${d.m_intro}\n\n`;
-  msg += `🔒 ${d.m_product}: ${product}\n`;
-  msg += `👤 ${d.m_name}: ${name}\n`;
-  msg += `📞 ${d.m_phone}: ${phone}`;
-  if (address && address.trim()) msg += `\n📍 ${d.m_address}: ${address.trim()}`;
-  if (install) msg += `\n🔧 ${d.m_install}`;
-  if (note && note.trim()) msg += `\n📝 ${d.m_note}: ${note.trim()}`;
+  msg += `• ${d.m_product}: ${product}\n`;
+  msg += `• ${d.m_name}: ${name}\n`;
+  msg += `• ${d.m_phone}: ${phone}`;
+  if (address && address.trim()) msg += `\n• ${d.m_address}: ${address.trim()}`;
+  if (install) msg += `\n• ${d.m_install}`;
+  if (note && note.trim()) msg += `\n• ${d.m_note}: ${note.trim()}`;
   msg += `\n\n${d.m_closing}`;
   return msg;
 }
